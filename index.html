@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Substituir Letras</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Decodificador de Texto - Alura Challenges Oracle ONE</h1>
+        <div class="flex-container">
+            <textarea id="texto" rows="10" cols="30"></textarea>
+            <div class="resultado-container">
+                <p id="resultado"></p>
+                <button id="copiarResultado" onclick="copiarResultado()">Copiar</button>
+            </div>
+        </div>
+        <div class="button-container">
+            <button onclick="Criptografar()">Criptografar</button>
+            <button onclick="descriptografarLetras()">Descriptografar</button>
+        </div>
+    </div>
+
+    <script>
+        function limparCampos() {
+            document.getElementById('texto').value = '';
+            document.getElementById('resultado').innerText = '';
+        }
+
+        function Criptografar() {
+            let textarea = document.getElementById('texto');
+            let texto = textarea.value;
+            let textoModificado = '';
+
+            for (let i = 0; i < texto.length; i++) {
+                let letra = texto[i];
+
+                if (letra === 'e') {
+                    textoModificado += 'enter';
+                } else if (letra === 'i') {
+                    textoModificado += 'imes';
+                } else if (letra === 'a') {
+                    textoModificado += 'ai';
+                }else if (letra === 'o') {
+                    textoModificado += 'ober';
+                }else if (letra === 'u') {
+                    textoModificado += 'ufat';
+                }else {
+                    textoModificado += letra;
+                }
+            }
+
+            
+
+            limparCampos;
+            document.getElementById('resultado').innerText = textoModificado;
+        }
+
+        function descriptografarLetras() {
+            let textarea = document.getElementById('texto');
+            let texto = textarea.value;
+            let textoOriginal = texto
+                .replace(/enter/g, 'e')
+                .replace(/imes/g, 'i')
+                .replace(/ai/g, 'a')
+                .replace(/ober/g, 'o')
+                .replace(/ufat/g, 'u');
+
+            limparCampos;
+            document.getElementById('resultado').innerText = textoOriginal;
+        }
+
+        function copiarResultado() {
+            let resultado = document.getElementById('resultado');
+            let selecionado = document.createRange();
+
+            selecionado.selectNodeContents(resultado);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(selecionado);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+        }
+    </script>
+    </script>
+</body>
+</html>
